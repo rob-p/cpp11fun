@@ -6,7 +6,7 @@ using namespace std;
 
 void fiddleWithFile() {
 	string fname{"/tmp/file.txt"};
-	auto closer = [](ofstream* of) { cout << "Remembering to close the file now\n"; of->close(); };
+	auto closer = [](ofstream* of) { cout << "Remembering to close the file now\n"; of->close(); delete of;};
 	unique_ptr<ofstream, decltype(closer)> ofile(new ofstream(fname), closer);
 
 	(*ofile) << "La di da da\n";

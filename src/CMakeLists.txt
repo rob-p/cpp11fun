@@ -14,12 +14,22 @@ add_executable(ConstExprTest ConstExprTest.cpp)
 add_executable(AtomicTest AtomicTest.cpp)
 add_executable(SmartPtrTest SmartPtrTest.cpp)
 
+set(EXECUTABLES AutoTest MapTest MoveTest LambdaTest TupleTest SmartPtrTest
+	            ConstExprTest AtomicTest)
+
+if (IS_GCC) 
+	add_executable(UserDefinedLiteralTest UserDefinedLiteralTest.cpp)
+	set(EXECUTABLES ${EXECUTABLES} UserDefinedLiteralTest)
+endif()
+
+
 IF(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
   SET(CMAKE_INSTALL_PREFIX
     "${CMAKE_SOURCE_DIR}" CACHE PATH "install prefix" FORCE
     )
 ENDIF()
 
-install(TARGETS AutoTest MapTest MoveTest LambdaTest TupleTest SmartPtrTest ConstExprTest AtomicTest
+#AutoTest MapTest MoveTest LambdaTest TupleTest SmartPtrTest ConstExprTest AtomicTest
+install(TARGETS ${EXECUTABLES}
   RUNTIME DESTINATION bin
 )
